@@ -1,0 +1,24 @@
+{
+  "name": "11_wikistack",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "dependencies": {
+    "body-parser": "^1.15.0",
+    "express": "^4.13.4",
+    "fs": "0.0.2",
+    "mime": "^1.3.4",
+    "mongoose": "^4.4.7",
+    "morgan": "^1.7.0",
+    "nodemon": "^1.9.1",
+    "path": "^0.12.7",
+    "swig": "^1.4.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon -e html,js,css /Users/danetomseth/documents/fullstack/workshops/11_wikistack/app.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
