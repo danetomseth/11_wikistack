@@ -17,6 +17,23 @@ var pageSchema = new mongoose.Schema({
   tags: 	[]
 });
 
+pageSchema.statics.findByTag = function(tag){
+    return this.find({ 
+    	//tags: {$elemMatch: { $eq: tag } }
+    	 tags: {
+            $in: tag}
+    })
+    .exec()
+}
+
+pageSchema.method.similar = function(page){
+	var array = this.find({
+		tags: { $in: page.tags}
+	});
+
+}
+
+//Pre Hook for Page Creation
 pageSchema.pre('save', function(next){
 
 	this.urlTitle = generateUrlTitle(this.title);
@@ -38,24 +55,22 @@ pageSchema.pre('save', function(next){
 	next();
 })
 
-pageSchema.statics.findByTag = function(tag){
-    return this.find({ tags: {$elemMatch: { $eq: tag } }})
-    .exec()
-}
-
+//router
 pageSchema.virtual('router').get(function () {
-	// console.log(this);
 	return '/wiki/'+ this.urlTitle;
 })
+
 
 var userSchema = new mongoose.Schema({
   name: {type: String, required:true},
   email: {type: String, required:true, unique:true},
 });
 
+
 var Page = mongoose.model('Page', pageSchema);
 var User = mongoose.model('User', userSchema);
 
+//Exports
 module.exports = {
   Page: Page,
   User: User
